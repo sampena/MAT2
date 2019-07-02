@@ -20,13 +20,13 @@ def GaussJordan(A, b):
 #     % Parámetros: 
 #     %  A: matrix de los coeficientes del sistema de ecuaciones lineales de n x n  
 #     %  b: Vector de n x 1 complemento a la matriz ampliada 
-#     % Salida: X Solución of AX=B.
-#     % post-condition: A y B fueron modificados. 
+#     % Salida: x Solución of Ax=b.
+#     % post-condition: A y b fueron modificados. 
     '''
     #Obtención de la dimensión de la matriz
     n =  len(A)
     
-    # Validación de correspondencia entre A y B
+    # Validación de correspondencia entre A y b
     if b.size != n:
         raise ValueError("Argumento inválido: tamaños incompatibles entre matriz A & vector b.", b.size, n)
     # k represents the current pivot row. Since GE traverses the matrix in the upper 
@@ -49,8 +49,8 @@ def GaussJordan(A, b):
             #Equation solution column
             b[row] = b[row] - multiplier*b[k]
     
-    print (A)
-    print (b)
+    #print (A)
+    #print (b)
     x = np.zeros(n)
     k = n-1
     x[k] = b[k]/A[k,k]
@@ -58,8 +58,3 @@ def GaussJordan(A, b):
         x[k] = (b[k] - np.dot(A[k,k+1:],x[k+1:]))/A[k,k]
         k = k-1
     return x
-
-if __name__ == "__main__":
-    A = np.array([[1.,-1.,1.,-1.],[1.,0.,0.,0.],[1.,1.,1.,1.],[1.,2.,4.,8.]])
-    b =  np.array([[14.],[4.],[2.],[2.]])
-    print (GaussJordan(A,b))
